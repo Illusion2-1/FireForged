@@ -43,10 +43,8 @@ public class Fireforged {
         RULE_MANAGER = new RuleManager(FirewallConfig.rules.get());
         LOGGER.info("\033[1;34mInitialized firewall rule manager\033[0m");
         LOGGER.info("\033[1;34mLoaded rules:\033[0m");
-        RULE_MANAGER.getFirewallRules().getSortedRules().forEach(rule -> {
-            LOGGER.info("\033[0m{} \033[1;34m{}\033[32m{}\033[0m{}",
-                    String.format("%-5s", rule.getPriority()), String.format("%-39s", rule.getCidr()), String.format("%-2s", rule.getPrefixLength()), String.format("%-6s", rule.getAction()));
-        });
+        RULE_MANAGER.getFirewallRules().getSortedRules().forEach(rule -> LOGGER.info("\033[0m{} \033[1;34m{}\033[32m{}\033[0m{}",
+                String.format("%-5s", rule.getPriority()), String.format("%-39s", rule.getCidr()), String.format("%-2s", rule.getPrefixLength()), String.format("%-6s", rule.getAction())));
     }
 
     public static Logger getLogger(){

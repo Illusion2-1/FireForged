@@ -53,8 +53,4 @@ public class ProxyParseResult {
         return realAddress;
     }
 
-    @Nullable
-    public String getErrorReason() {
-        return errorReason;
-    }
 }

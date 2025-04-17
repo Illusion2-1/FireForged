@@ -26,9 +26,6 @@ public abstract class ServerStatusPacketListenerImplMixin {
 
     @Shadow @Final private Connection connection;
 
-    // Shadow the static field if needed for disconnection reason
-    @Shadow @Final private static Component DISCONNECT_REASON;
-
     static {
         if (FirewallConfig.hideMotd.get()) fireforged$logger.info("\033[1;36mHide Motd function enable. Clients will no longer be able to ping server.\033[0m");
     }

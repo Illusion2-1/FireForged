@@ -9,6 +9,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
+@SuppressWarnings("ReassignedVariable")
 public class ProxyV2Parser {
     private static final Logger logger = Fireforged.getLogger();
     // HAProxy v2 constants
@@ -21,12 +22,11 @@ public class ProxyV2Parser {
     private static final int V2_HEADER_MIN_SIZE = 16; // Signature + version/cmd + family/proto + length
     public static final int V2_MAX_HEADER_SIZE = 216 + V2_HEADER_MIN_SIZE; // Max addr info len = 216
 
-    private static final byte V2_VERSION_CMD = 0x21; // Version 2, PROXY command
+    // Version 2, PROXY command
     private static final byte AF_INET = 0x10;
     private static final byte AF_INET6 = 0x20;
     private static final byte AF_UNSPEC = 0x00; // LOCAL command often uses UNSPEC
     private static final byte PROTO_TCP = 0x01;
-    private static final byte PROTO_UDP = 0x02;
     private static final byte PROTO_UNSPEC = 0x00;
 
     /**
@@ -85,7 +85,7 @@ public class ProxyV2Parser {
         // --- We have the full header data ---
 
         // 7. Parse Address Info based on family
-        SocketAddress sourceAddress = null;
+        SocketAddress sourceAddress;
         SocketAddress destAddress = null; // might not need destination
         int addressInfoOffset = initialReaderIndex + V2_HEADER_MIN_SIZE;
 
