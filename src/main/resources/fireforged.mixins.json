@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "by.illusion21.fireforged.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "fireforged.refmap.json",
+  "mixins": [
+    "ServerConnectionListenerInitializerMixin",
+    "ServerStatusPacketListenerImplMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
