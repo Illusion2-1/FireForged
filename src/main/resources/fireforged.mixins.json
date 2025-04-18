@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "fireforged.refmap.json",
   "mixins": [
+    "ConnectionAccessor",
     "ServerConnectionListenerInitializerMixin",
     "ServerStatusPacketListenerImplMixin"
   ],

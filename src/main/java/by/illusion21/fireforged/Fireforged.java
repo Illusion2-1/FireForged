@@ -2,6 +2,7 @@ package by.illusion21.fireforged;
 
 import by.illusion21.fireforged.config.FirewallConfig;
 import by.illusion21.fireforged.firewall.utils.RuleManager;
+import by.illusion21.fireforged.listener.ConnectionRealIpUpdater;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,9 +38,8 @@ public class Fireforged {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("\033[1;34m\033[5mThe \033[36mFireForged\033[32m initializating. \033[0m");
-        RULE_MANAGER = new RuleManager(FirewallConfig.rules.get());
-        LOGGER.info("\033[1;34mInitialized firewall rule manager\033[0m");
-
+        event.enqueueWork(ConnectionRealIpUpdater::register);
+        LOGGER.info("\033[1;34mInitialized Proxy Protocol ip updater\033[0m");
     }
 
     @SubscribeEvent
