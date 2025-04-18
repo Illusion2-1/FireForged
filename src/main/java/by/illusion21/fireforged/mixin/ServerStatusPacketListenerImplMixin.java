@@ -4,7 +4,6 @@ import by.illusion21.fireforged.Fireforged;
 import by.illusion21.fireforged.config.FirewallConfig;
 import io.netty.channel.ChannelOption;
 import net.minecraft.network.Connection;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.status.ServerboundPingRequestPacket;
 import net.minecraft.network.protocol.status.ServerboundStatusRequestPacket;
 import net.minecraft.server.network.ServerStatusPacketListenerImpl;

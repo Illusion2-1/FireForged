@@ -14,13 +14,12 @@ public class ProxyParseResult {
 
     private final Status status;
     @Nullable private final SocketAddress realAddress; // Only valid if status is SUCCESS
-    @Nullable private final String errorReason;      // Optional reason for INVALID
 
     // Private constructors, use static factory methods
-    private ProxyParseResult(Status status, @Nullable SocketAddress realAddress, @Nullable String errorReason) {
+    private ProxyParseResult(Status status, @Nullable SocketAddress realAddress, @Nullable String ignoredErrorReason) {
         this.status = status;
         this.realAddress = realAddress;
-        this.errorReason = errorReason;
+        // Optional reason for INVALID
     }
 
     public static ProxyParseResult success(SocketAddress realAddress) {

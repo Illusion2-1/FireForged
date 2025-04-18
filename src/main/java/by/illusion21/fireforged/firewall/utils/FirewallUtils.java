@@ -3,14 +3,8 @@ package by.illusion21.fireforged.firewall.utils;
 import by.illusion21.fireforged.config.entity.Action;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOption;
-import io.netty.util.AttributeKey;
-
-import java.net.SocketAddress;
 
 public class FirewallUtils {
-
-    // Attribute key to store the real IP on the channel after PROXY parsing
-    public static final AttributeKey<SocketAddress> REAL_IP_KEY = AttributeKey.valueOf("firewall_real_ip");
 
     // --- Connection Closing ---
     public static void closeConnection(ChannelHandlerContext ctx, Action action) {
@@ -27,6 +21,7 @@ public class FirewallUtils {
         }
     }
 
+    @SuppressWarnings("unused")
     public static void closeConnection(ChannelHandlerContext ctx) {
         if (ctx.channel().isActive()) {
             ctx.close();

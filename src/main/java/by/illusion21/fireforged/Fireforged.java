@@ -60,6 +60,7 @@ public class Fireforged {
         });
     }
 
+
     public static Logger getLogger(){
         return LOGGER;
     }
