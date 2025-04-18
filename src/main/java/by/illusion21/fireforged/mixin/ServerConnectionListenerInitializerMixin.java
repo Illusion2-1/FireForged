@@ -19,7 +19,7 @@ public abstract class ServerConnectionListenerInitializerMixin {
 
     static {
         fireforged$LOGGER.info("\033[1;36m\033[4mMixining into [{}]\033[0m", ServerConnectionListenerInitializerMixin.class.getName());
-        fireforged$LOGGER.info("\033[1;36mfireforged_firewall_handler \033[1;33mwill be taking over prerouting from now on\033[0m");
+        fireforged$LOGGER.info("\033[1;36mfireforged_firewall_handler \033[1;33mwill be taking over input chain from now on\033[0m");
     }
     @Inject(method = "initChannel(Lio/netty/channel/Channel;)V", at = @At("HEAD"))
     private void onInitChannelAddFirewall(Channel channel, CallbackInfo ci) {

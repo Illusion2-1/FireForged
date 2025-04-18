@@ -35,13 +35,15 @@ public class Fireforged {
         return RULE_MANAGER;
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) { }
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
+    private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("\033[1;34m\033[5mThe \033[36mFireForged\033[32m initializating. \033[0m");
         RULE_MANAGER = new RuleManager(FirewallConfig.rules.get());
         LOGGER.info("\033[1;34mInitialized firewall rule manager\033[0m");
+
+    }
+
+    @SubscribeEvent
+    public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("\033[1;34mLoaded rules:\033[0m");
         RULE_MANAGER.getFirewallRules().getSortedRules().forEach(rule -> LOGGER.info("\033[0m{} \033[1;34m{}\033[32m{}\033[0m{}",
                 String.format("%-5s", rule.getPriority()), String.format("%-39s", rule.getCidr()), String.format("%-2s", rule.getPrefixLength()), String.format("%-6s", rule.getAction())));
