@@ -44,6 +44,8 @@ public class Fireforged {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+        RULE_MANAGER = new RuleManager(FirewallConfig.rules.get());
+        LOGGER.info("\033[1;34mInitialized firewall rule manager\033[0m");
         LOGGER.info("\033[1;34mLoaded rules:\033[0m");
         RULE_MANAGER.getFirewallRules().getSortedRules().forEach(rule -> {
             String logMessage = String.format(
