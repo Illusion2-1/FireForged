@@ -45,8 +45,17 @@ public class Fireforged {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("\033[1;34mLoaded rules:\033[0m");
-        RULE_MANAGER.getFirewallRules().getSortedRules().forEach(rule -> LOGGER.info("\033[0m{} \033[1;34m{}\033[32m{}\033[0m{}",
-                String.format("%-5s", rule.getPriority()), String.format("%-39s", rule.getCidr()), String.format("%-2s", rule.getPrefixLength()), String.format("%-6s", rule.getAction())));
+        RULE_MANAGER.getFirewallRules().getSortedRules().forEach(rule -> {
+            String logMessage = String.format(
+                    // {Priority}  {CIDR}          /{Prefix}  {Action}
+                    "\033[0m%-5s  \033[1;34m%-22s \033[32m/%-3s  \033[0m%-7s",
+                    rule.getPriority(),      // Field 1: Priority, normal color, 5 chars wide, left-aligned
+                    rule.getCidr(),          // Field 2: CIDR, blue color, 22 chars wide, left-aligned
+                    rule.getPrefixLength(),  // Field 3: Prefix Length, green color, prefixed with '/', 3 chars wide, left-aligned
+                    rule.getAction()         // Field 4: Action, normal color, 7 chars wide, left-aligned
+            );
+            LOGGER.info(logMessage);
+        });
     }
 
     public static Logger getLogger(){
