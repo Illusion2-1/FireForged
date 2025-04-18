@@ -1,4 +1,4 @@
-package by.illusion21.fireforged.proxyprotocol;
+package by.illusion21.fireforged.proxyprotocol.utils;
 
 import java.net.SocketAddress;
 import javax.annotation.Nullable;

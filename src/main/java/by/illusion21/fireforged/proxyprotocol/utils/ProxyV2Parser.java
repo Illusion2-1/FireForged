@@ -1,4 +1,4 @@
-package by.illusion21.fireforged.proxyprotocol;
+package by.illusion21.fireforged.proxyprotocol.utils;
 
 import by.illusion21.fireforged.Fireforged;
 import io.netty.buffer.ByteBuf;
@@ -86,7 +86,7 @@ public class ProxyV2Parser {
 
         // 7. Parse Address Info based on family
         SocketAddress sourceAddress;
-        SocketAddress destAddress = null; // might not need destination
+        // might not need destination
         int addressInfoOffset = initialReaderIndex + V2_HEADER_MIN_SIZE;
 
         try {
@@ -99,9 +99,7 @@ public class ProxyV2Parser {
                     buffer.getBytes(addressInfoOffset, srcIp4);
                     buffer.getBytes(addressInfoOffset + 4, dstIp4);
                     int srcPort4 = buffer.getUnsignedShort(addressInfoOffset + 8);
-                    int dstPort4 = buffer.getUnsignedShort(addressInfoOffset + 10);
                     sourceAddress = new InetSocketAddress(InetAddress.getByAddress(srcIp4), srcPort4);
-                    destAddress = new InetSocketAddress(InetAddress.getByAddress(dstIp4), dstPort4);
                     break;
 
                 case AF_INET6: // IPv6, unlikely from frpc
@@ -112,9 +110,7 @@ public class ProxyV2Parser {
                     buffer.getBytes(addressInfoOffset, srcIp6);
                     buffer.getBytes(addressInfoOffset + 16, dstIp6);
                     int srcPort6 = buffer.getUnsignedShort(addressInfoOffset + 32);
-                    int dstPort6 = buffer.getUnsignedShort(addressInfoOffset + 34);
                     sourceAddress = new InetSocketAddress(InetAddress.getByAddress(srcIp6), srcPort6);
-                    destAddress = new InetSocketAddress(InetAddress.getByAddress(dstIp6), dstPort6);
                     break;
 
                 case AF_UNSPEC: // Usually for LOCAL command, no address info expected? Or Unix socket path?

@@ -1,6 +1,7 @@
 package by.illusion21.fireforged.mixin;
 
 import by.illusion21.fireforged.Fireforged;
+import by.illusion21.fireforged.proxyprotocol.ProxyHandler;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelPipeline;
 import org.slf4j.Logger;
@@ -26,7 +27,8 @@ public abstract class ServerConnectionListenerInitializerMixin {
         ChannelPipeline pipeline = channel.pipeline();
 
         if (pipeline.get("fireforged_firewall_handler") == null) { // safety check
-            pipeline.addFirst("fireforged_firewall_handler", new FirewallHandler());
+            pipeline.addFirst("fireforged_proxy_handler", new ProxyHandler());
+            pipeline.addLast("fireforged_firewall_handler", new FirewallHandler());
             fireforged$LOGGER.debug("Added FirewallHandler for channel: {}", channel.id());
         }
     }
