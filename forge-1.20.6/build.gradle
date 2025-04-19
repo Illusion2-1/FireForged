@@ -1,8 +1,6 @@
 buildscript {
     repositories {
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url "https://plugins.gradle.org/m2/" }
         mavenCentral()
     }
     dependencies {
@@ -22,15 +20,15 @@ group = mod_group_id
 version = mod_version
 
 base {
-    archivesName = "1_20_R1.${mod_id}"
+    archivesName = "1_20_R6.${mod_id}"
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
 minecraft {
-    mappings channel: mapping_channel_1_20_R1, version: mapping_version_1_20_R1
+    mappings channel: mapping_channel_1_20_R6, version: mapping_version_1_20_R6
     copyIdeResources = true
     runs {
         // applies to all the run configs below
@@ -85,7 +83,7 @@ repositories {
 
 dependencies {
 
-    minecraft "net.minecraftforge:forge:${minecraft_version_1_20_R1}-${forge_version_1_20_R1}"
+    minecraft "net.minecraftforge:forge:${minecraft_version_1_20_R6}-${forge_version_1_20_R6}"
 
     implementation project(':core')
 
@@ -95,9 +93,9 @@ dependencies {
 
 
 tasks.named('processResources', ProcessResources).configure {
-    var replaceProperties = [minecraft_version   : minecraft_version_1_20_R1, minecraft_version_range: minecraft_version_range_1_20_R1,
-                             forge_version       : forge_version_1_20_R1, forge_version_range: forge_version_range_1_20_R1,
-                             loader_version_range: loader_version_range_1_20_R1,
+    var replaceProperties = [minecraft_version   : minecraft_version_1_20_R6, minecraft_version_range: minecraft_version_range_1_20_R6,
+                             forge_version       : forge_version_1_20_R6, forge_version_range: forge_version_range_1_20_R6,
+                             loader_version_range: loader_version_range_1_20_R6,
                              mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
                              mod_authors         : mod_authors, mod_description: mod_description,]
 

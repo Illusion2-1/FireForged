@@ -17,3 +17,6 @@ include 'core'
 include 'forge-1.19.2'
 include 'forge-1.19.4'
 include 'forge-1.20.1'
+include 'forge-1.20.6'
+include 'forge-1.21.1'
+

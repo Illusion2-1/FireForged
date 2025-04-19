@@ -1,13 +1,25 @@
+import org.gradle.jvm.toolchain.internal.DefaultJavaLanguageVersion
+
 plugins {
-    id 'java'
+    // Apply base plugin to the root project for tasks like 'clean'
     id 'base'
 }
 
+// Define common properties or versions if needed (can also be in gradle.properties)
+ext {
+    // Example: Define Java versions centrally
+    javaVersionOld = JavaLanguageVersion.of(17) as DefaultJavaLanguageVersion
+    javaVersionNew = JavaLanguageVersion.of(21) as DefaultJavaLanguageVersion
+}
+
 allprojects {
+    // Apply Java plugin to all subprojects (core and forge modules)
     apply plugin: 'java'
 
-    group = mod_group_id // 从 gradle.properties 读取
-    version = mod_version // 从 gradle.properties 读取
+    // Read properties from gradle.properties
+    // Ensure mod_group_id and mod_version are defined in your gradle.properties file
+    group = providers.gradleProperty("mod_group_id").getOrElse("com.example.fireforged")
+    version = providers.gradleProperty("mod_version").getOrElse("1.0.0")
 
     repositories {
         mavenCentral()
@@ -17,10 +29,60 @@ allprojects {
 
     tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    java {
+        toolchain {
+            languageVersion = rootProject.ext.javaVersionOld // Default to Java 17
+        }
     }
 }
 
-subprojects {
+// Specific configuration for the 'core' project
+project(':core') {
+    apply plugin: 'java-library'
+
+    java {
+        toolchain {
+            languageVersion = rootProject.ext.javaVersionOld
+        }
+    }
+
+    dependencies {
+
+    }
+}
+
+
+[':forge-1.19.2', ':forge-1.19.4', ':forge-1.20.1'].each { projectName ->
+    project(projectName) {
+
+
+        java {
+            toolchain {
+                languageVersion = rootProject.ext.javaVersionOld // Java 17
+            }
+        }
+
+        dependencies {
+            implementation project(':core')
+        }
+    }
+}
+
+
+[':forge-1.20.6', ':forge-1.21.1'].each { projectName ->
+    project(projectName) {
+
+        java {
+            toolchain {
+                languageVersion = rootProject.ext.javaVersionNew // Java 21
+            }
+        }
+
+        dependencies {
+            implementation project(':core')
+
+        }
+    }
 }
