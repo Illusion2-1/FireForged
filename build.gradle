@@ -1,13 +1,11 @@
 import org.gradle.jvm.toolchain.internal.DefaultJavaLanguageVersion
 
 plugins {
-    // Apply base plugin to the root project for tasks like 'clean'
     id 'base'
 }
 
 // Define common properties or versions if needed (can also be in gradle.properties)
 ext {
-    // Example: Define Java versions centrally
     javaVersionOld = JavaLanguageVersion.of(17) as DefaultJavaLanguageVersion
     javaVersionNew = JavaLanguageVersion.of(21) as DefaultJavaLanguageVersion
 }
@@ -15,9 +13,6 @@ ext {
 allprojects {
     // Apply Java plugin to all subprojects (core and forge modules)
     apply plugin: 'java'
-
-    // Read properties from gradle.properties
-    // Ensure mod_group_id and mod_version are defined in your gradle.properties file
     group = providers.gradleProperty("mod_group_id").getOrElse("com.example.fireforged")
     version = providers.gradleProperty("mod_version").getOrElse("1.0.0")
 
@@ -38,7 +33,6 @@ allprojects {
     }
 }
 
-// Specific configuration for the 'core' project
 project(':core') {
     apply plugin: 'java-library'
 
