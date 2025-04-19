@@ -15,3 +15,4 @@ plugins {
 rootProject.name = 'Fireforged'
 include 'core'
 include 'forge-1.19.2'
+include 'forge-1.19.4'
