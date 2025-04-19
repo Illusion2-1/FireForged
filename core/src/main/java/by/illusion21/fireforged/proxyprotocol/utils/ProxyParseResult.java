@@ -1,7 +1,6 @@
 package by.illusion21.fireforged.proxyprotocol.utils;
 
 import java.net.SocketAddress;
-import javax.annotation.Nullable;
 
 public class ProxyParseResult {
 
@@ -13,10 +12,10 @@ public class ProxyParseResult {
     }
 
     private final Status status;
-    @Nullable private final SocketAddress realAddress; // Only valid if status is SUCCESS
+    private final SocketAddress realAddress; // Only valid if status is SUCCESS
 
     // Private constructors, use static factory methods
-    private ProxyParseResult(Status status, @Nullable SocketAddress realAddress, @Nullable String ignoredErrorReason) {
+    private ProxyParseResult(Status status, SocketAddress realAddress, String ignoredErrorReason) {
         this.status = status;
         this.realAddress = realAddress;
         // Optional reason for INVALID
@@ -46,7 +45,6 @@ public class ProxyParseResult {
         return status;
     }
 
-    @Nullable
     public SocketAddress getRealAddress() {
         // Consider adding check: if (status != Status.SUCCESS) throw new IllegalStateException();
         return realAddress;

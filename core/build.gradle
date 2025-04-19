@@ -1,0 +1,9 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api 'io.netty:netty-transport:4.2.0.Final'
+    implementation 'net.minecraftforge:eventbus:6.0.3'
+    implementation 'org.slf4j:slf4j-api:1.8.0-beta4'
+}

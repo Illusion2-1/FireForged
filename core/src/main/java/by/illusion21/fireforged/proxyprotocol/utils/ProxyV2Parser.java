@@ -1,8 +1,6 @@
 package by.illusion21.fireforged.proxyprotocol.utils;
 
-import by.illusion21.fireforged.Fireforged;
 import io.netty.buffer.ByteBuf;
-import org.slf4j.Logger;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -11,7 +9,6 @@ import java.net.UnknownHostException;
 
 @SuppressWarnings("ReassignedVariable")
 public class ProxyV2Parser {
-    private static final Logger logger = Fireforged.getLogger();
     // HAProxy v2 constants
     private static final byte[] V2_SIGNATURE = {
             (byte) 0x0D, (byte) 0x0A, (byte) 0x0D, (byte) 0x0A, (byte) 0x00,
@@ -117,7 +114,6 @@ public class ProxyV2Parser {
                     // For PROXY command with UNSPEC, behavior might vary. Assume no useful IP.
                     // If frpc sends this, will need to know what data follows.
                     // Treat as invalid or (handle specifically if frpc uses it meaningfully - no waaaaaaaay) .
-                    logger.error("\033[1;31mPROXY header has UNSPEC family.\033[0m");
                     return ProxyParseResult.invalid("UNSPEC address family not handled");
 
                 default:
@@ -126,7 +122,6 @@ public class ProxyV2Parser {
         } catch (UnknownHostException e) {
             return ProxyParseResult.invalid("Failed to resolve IP address from PROXY header");
         } catch (Exception e) {
-            logger.error("\033[1;31mError parsing PROXY address details\033[0m", e);
             return ProxyParseResult.invalid("Exception during address parsing");
         }
 

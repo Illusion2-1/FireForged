@@ -6,6 +6,7 @@ import by.illusion21.fireforged.listener.ConnectionRealIpUpdater;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -26,7 +27,7 @@ public class Fireforged {
 
     public Fireforged(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
-        context.registerConfig(ModConfig.Type.SERVER, FirewallConfig.SERVER_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, FirewallConfig.SERVER_CONFIG);
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
